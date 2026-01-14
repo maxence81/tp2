@@ -1,3 +1,4 @@
+
 package pharmacie.entity;
 
 import jakarta.persistence.Column;
@@ -13,13 +14,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AdressePostale {
 
+    // On laisse Spring gérer le nom physique "rue" ou on met "adresse" comme
+    // demandé
     @Column(name = "ADRESSE", length = 60)
     @Size(max = 60)
     private String rue;
 
-    @Column(name = "CODE_POSTAL", length = 10)
+    // Supprimer l'attribut 'name' ici pour éviter le conflit avec le champ
+    // 'codePostal'
+    @Column(length = 10)
     @Size(max = 10)
-    private String codePostal;
+    private String codePostal; // Sera automatiquement mappé en "code_postal"
 
     @Column(length = 15)
     @Size(max = 15)

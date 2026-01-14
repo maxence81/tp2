@@ -2,15 +2,12 @@ package pharmacie.dao;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import pharmacie.entity.Commande; // Import indispensable
 
-import pharmacie.entity.Commande;
+// Utiliser <Commande, Integer> et non <CommandeRepository, Integer>
+public interface CommandeRepository extends JpaRepository<Commande, Integer> {
 
-// <Commande, Integer> car la clé primaire est un Integer
-public interface CommandeRepository extends JpaRepository<CommandeRepository, Integer> {
-
-    // Méthode magique demandée : trouver les commandes après une date
-    // Spring traduit "After" par l'opérateur SQL ">"
-    List<CommandeRepository> findBySaisieLeAfter(LocalDate date);
+    // La méthode doit retourner une liste d'entités Commande
+    List<Commande> findBySaisieLeAfter(LocalDate date);
 }

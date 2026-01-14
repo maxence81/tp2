@@ -19,17 +19,16 @@ public class RepositoryCustomMethodsTest {
     @Autowired
     private MedicamentRepository medicamentRepository;
 
-
     @Test // Ce test se base uniquement sur les données définies dans data.sql
-    public void testMedicamentCustomMethods() {    
+    public void testMedicamentCustomMethods() {
         Medicament indisponible = medicamentRepository.findByNom("Lévofloxacine 500mg").orElseThrow();
-        Medicament disponible   = medicamentRepository.findByNom("Doliprane Effervescent 1g").orElseThrow();
-    
+        Medicament disponible = medicamentRepository.findByNom("Doliprane Effervescent 1g").orElseThrow();
+
         // Trouve tous les médicaments disponibles
         List<Medicament> disponibles = medicamentRepository.findByIndisponibleFalse();
 
         assertTrue(disponibles.contains(disponible));
-        assertFalse(disponibles.contains(indisponible));        
+        assertFalse(disponibles.contains(indisponible));
         assertFalse(disponibles.isEmpty());
     }
 
@@ -54,6 +53,5 @@ public class RepositoryCustomMethodsTest {
         assertTrue(list.stream().anyMatch(cat -> cat.getLibelle().equals("AntibiotiquesTest")));
         assertTrue(list.stream().anyMatch(cat -> cat.getLibelle().equals("AnalgesiquesTest")));
     }
-
 
 }

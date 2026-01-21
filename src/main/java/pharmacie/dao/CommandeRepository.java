@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pharmacie.entity.Commande; // Import indispensable
 
-// Utiliser <Commande, Integer> et non <CommandeRepository, Integer>
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
 
-    // La méthode doit retourner une liste d'entités Commande
     List<Commande> findBySaisieLeAfter(LocalDate date);
+
+    Commande findByNom(String nom);
+
+    @org.springframework.data.jpa.repository.Query("SELECT SUM(l.quantite) FROM Commande c JOIN c.lignes l WHERE c.dispensaire.code = :codeDispensaire AND c.envoyeeLe IS NOT NULL")
+    Long countArticlesCommandesPourDispensaire(String codeDispensaire);
+
+    List<Commande> findByDispensaireCodeAndEnvoyeeLeIsNull(String codeDispensaire);
 }

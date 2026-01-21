@@ -22,7 +22,7 @@ public class AdressePostale {
 
     // Supprimer l'attribut 'name' ici pour éviter le conflit avec le champ
     // 'codePostal'
-    @Column(length = 10)
+    @Column(name = "code_postal", length = 10)
     @Size(max = 10)
     private String codePostal; // Sera automatiquement mappé en "code_postal"
 

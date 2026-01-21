@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Commande {
 
     @Id
@@ -16,6 +19,11 @@ public class Commande {
 
     private LocalDate saisieLe;
     private LocalDate envoyeeLe;
+
+    // Champs ajoutés pour correspondre aux tests
+    @Column(length = 50)
+    private String nom;
+    private Boolean estValidee;
 
     @Column(precision = 18, scale = 2)
     private BigDecimal port;
